@@ -1,12 +1,14 @@
 import FriendRequestSidebarOption from '@/components/FriendRequestSidebarOption'
 import { Icon, Icons } from '@/components/icons'
 import SignOutButton from '@/components/SignOutButton'
+import { getFriendsByuserId } from '@/helpers/get-friends-by-user-ids'
 import { fetchRedis } from '@/helpers/redis'
 import { authOptions } from '@/libs/auth'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import SidebarChatList from '@/components/sidebarChatList'
 import React from 'react'
 
 interface SidebarOption{
@@ -30,6 +32,8 @@ const layout = async ({children}: {children: React.ReactNode}) => {
         return notFound()
     }
 
+    const friends = await getFriendsByuserId(session.user.id)
+    // console.log(friends)
     const unseenRequestCount = (
         await fetchRedis(
             'smembers',
@@ -44,13 +48,16 @@ const layout = async ({children}: {children: React.ReactNode}) => {
                     <Icons.Logo className='h-8 w-auto text-indigo-600'/> 
                 </Link>
                 
-                <div className='text-xs font-semibold leading-6 text-gray-400'>
+                {friends.length > 0 ?(<div className='text-xs font-semibold leading-6 text-gray-400'>
                     Your Chats
-                </div>
+                </div>):null}
 
                 <nav className='flex flex-1 flex-col'>
                     <ul role='list' className='flex- flex-1 flex-col gap-y-7'>
-                        <li>// chats user has</li>
+                        
+                        <SidebarChatList sessionId={session.user.id} friends={friends}/>
+
+
                         <li>
                             <div className='text-xs font-semibold leading-6 text-gray-400'>
                                 Overview
