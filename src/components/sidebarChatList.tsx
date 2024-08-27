@@ -18,6 +18,7 @@ const SidebarChatList = ({friends, sessionId}:SidebarChatListProps) => {
   
   const [unseenMessage, setunseenMessage] = useState<Message[]>([])
 
+
   useEffect(()=>{
     if(pathname?.includes('chat')){
       setunseenMessage((prev)=>{
