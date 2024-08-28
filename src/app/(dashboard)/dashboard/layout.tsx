@@ -1,6 +1,5 @@
 import FriendRequestSidebarOption from '@/components/FriendRequestSidebarOption'
-import { Icon} from '@/components/Icons'
-import { Icons } from '@/components/Icons'
+import { icon, icons } from '@/components/Icons'
 import SignOutButton from '@/components/SignOutButton'
 import { getFriendsByuserId } from '@/helpers/get-friends-by-user-ids'
 import { fetchRedis } from '@/helpers/redis'
@@ -16,7 +15,7 @@ interface SidebarOption{
     id: number
     name: string
     href: string
-    Icon: Icon
+    Icon: icon
 }
 const sidebarOption: SidebarOption[] =[
     {
@@ -46,7 +45,7 @@ const layout = async ({children}: {children: React.ReactNode}) => {
         <div className='w-full flex h-screen'>
             <div className='flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6'>
                 <Link href="/dashboard" className='flex h-16 shrink-0 items-center'>
-                    <Icons.Logo className='h-8 w-auto text-indigo-600'/> 
+                    <icons.Logo className='h-8 w-auto text-indigo-600'/> 
                 </Link>
                 
                 {friends.length > 0 ?(<div className='text-xs font-semibold leading-6 text-gray-400'>
@@ -66,7 +65,7 @@ const layout = async ({children}: {children: React.ReactNode}) => {
 
                             <ul role='list' className='-mx-2 mt-2 space-y-1'>
                                 {sidebarOption.map((option)=>{
-                                    const Icon = Icons[option.Icon]
+                                    const Icon = icons[option.Icon]
                                     return(
                                         <li key={option.id}>
                                             <Link href={option.href} className='text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold'>
