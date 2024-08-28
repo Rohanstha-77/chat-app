@@ -1,5 +1,5 @@
 import FriendRequestSidebarOption from '@/components/FriendRequestSidebarOption'
-import { icon, icons } from '@/components/Icons'
+import { icon, icons } from '@/components/icons'
 import SignOutButton from '@/components/SignOutButton'
 import { getFriendsByuserId } from '@/helpers/get-friends-by-user-ids'
 import { fetchRedis } from '@/helpers/redis'
